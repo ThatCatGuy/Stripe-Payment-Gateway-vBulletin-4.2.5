@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<product productid="stripecheckout_api" active="1">
+	<title>Stripe Checkout</title>
+	<description>Add a Stripe Checkout API</description>
+	<version>3.0</version>
+	<url />
+	<versioncheckurl />
+	<dependencies>
+		<dependency dependencytype="vbulletin" minversion="4.2.5" maxversion="4.2.6" />
+	</dependencies>
+	<codes>
+		<code version="3.0">
+			<installcode><![CDATA[function toggle_stripe()
+{
+	global $vbulletin;
+
+	$setting = 0;
+	if ($check = $vbulletin->db->query_first("
+		SELECT paymentapiid
+		FROM " . TABLE_PREFIX . "paymentapi
+		WHERE active = 1
+	"))
+	{
+		if ($check = $vbulletin->db->query_first("
+			SELECT subscriptionid
+			FROM " . TABLE_PREFIX . "subscription
+			WHERE active = 1
+		"))
+		{
+			$setting = 1;
+		}
+	}
+
+	if ($setting != $vbulletin->options['subscriptionmethods'])
+	{
+		// update $vboptions
+		$vbulletin->db->query_write("
+			UPDATE " . TABLE_PREFIX . "setting
+			SET value = '$setting'
+			WHERE varname = 'subscriptionmethods'
+		");
+		build_options();
+	}
+}
+
+$db->hide_errors();
+$apisettings = array(
+	"public_key"      => array("type" => "text", "value" => "", "validate" => "string"),
+	"secret_key"      => array("type" => "text", "value" => "", "validate" => "string"),
+	"webhook_id"      => array("type" => "text", "value" => "", "validate" => "string"),
+	"webhook_secret"  => array("type" => "text", "value" => "", "validate" => "string"),
+	"success_url"  		=> array("type" => "text", "value" => "", "validate" => "string"),
+	"cancel_url"  		=> array("type" => "text", "value" => "", "validate" => "string")
+);
+
+$api = array(
+	"title" => "Stripe Checkout",
+	"active" => 1,
+	"classname" => "stripe",
+	"currency" => "usd,gbp,eur,aud,cad",
+	"recurring" => 1,
+	"settings" => serialize($apisettings),
+);
+
+$db->query_write(fetch_query_sql($api, 'paymentapi'));
+toggle_stripe();
+$db->show_errors();]]></installcode>
+			<uninstallcode><![CDATA[function toggle_stripe()
+{
+	global $vbulletin;
+
+
+	$setting = 0;
+	if ($check = $vbulletin->db->query_first("
+		SELECT paymentapiid
+		FROM " . TABLE_PREFIX . "paymentapi
+		WHERE active = 1
+	"))
+	{
+		if ($check = $vbulletin->db->query_first("
+			SELECT subscriptionid
+			FROM " . TABLE_PREFIX . "subscription
+			WHERE active = 1
+		"))
+		{
+			$setting = 1;
+		}
+	}
+
+	if ($setting != $vbulletin->options['subscriptionmethods'])
+	{
+		// update $vboptions
+		$vbulletin->db->query_write("
+			UPDATE " . TABLE_PREFIX . "setting
+			SET value = '$setting'
+			WHERE varname = 'subscriptionmethods'
+		");
+		build_options();
+	}
+}
+
+$db->hide_errors();
+$db->query_write("DELETE FROM " . TABLE_PREFIX . "paymentapi WHERE classname = 'stripe'");
+toggle_stripe();
+$db->show_errors();]]></uninstallcode>
+		</code>
+	</codes>
+	<templates>
+	</templates>
+	<stylevardfns>
+	</stylevardfns>
+	<stylevars>
+	</stylevars>
+	<plugins>
+	</plugins>
+	<phrases>
+		<phrasetype name="Subscription Tools" fieldname="subscription">
+			<phrase name="setting_stripe_public_key_desc" date="1696623122" username="ThatCatGuy" version="3.0"><![CDATA[Publishable key starting with <em>pk_</em> found in your <a href="https://dashboard.stripe.com/apikeys">Stripe Dashboard API Keys page</a>]]></phrase>
+			<phrase name="setting_stripe_public_key_title" date="1696623137" username="ThatCatGuy" version="3.0"><![CDATA[Publishable Key]]></phrase>
+			<phrase name="setting_stripe_secret_key_desc" date="1696623144" username="ThatCatGuy" version="3.0"><![CDATA[Secret key starting with <em>sk_</em> found in your <a href="https://dashboard.stripe.com/apikeys">Stripe Dashboard API Keys page</a>]]></phrase>
+			<phrase name="setting_stripe_secret_key_title" date="1696623153" username="ThatCatGuy" version="3.0"><![CDATA[Secret Key]]></phrase>
+			<phrase name="setting_stripe_webhook_id_desc" date="1748023543" username="ThatCatGuy" version="3.0"><![CDATA[Webhook ID starting with <em>we_</em> found in your <a href="https://dashboard.stripe.com/webhooks">Stripe Dashboard's Webhooks settings</a> page.]]></phrase>
+			<phrase name="setting_stripe_webhook_id_title" date="1696623166" username="ThatCatGuy" version="3.0"><![CDATA[Webhook ID]]></phrase>
+			<phrase name="setting_stripe_webhook_secret_desc" date="1748023535" username="ThatCatGuy" version="3.0"><![CDATA[Webhook Signing Secret starting with <em>whsec_</em> found in your <a href="https://dashboard.stripe.com/webhooks">Stripe Dashboard's Webhooks settings</a> page.]]></phrase>
+			<phrase name="setting_stripe_webhook_secret_title" date="1696623180" username="ThatCatGuy" version="3.0"><![CDATA[Webhook Signing Secret]]></phrase>
+			<phrase name="stripe_order_instructions" date="1696623185" username="ThatCatGuy" version="3.0"><![CDATA[To pay for your subscription using <a href="https://stripe.com/">Stripe</a> click the button below. <br />
+This will redirect you to the Stripe checkout page (https://checkout.stripe.com/) where you can fill in your payment information.]]></phrase>
+			<phrase name="setting_stripe_success_url_desc" date="1696623122" username="ThatCatGuy" version="3.0"><![CDATA[This is the URL that members are redirected to if the payment is Successful. <small>Required</small>]]></phrase>
+			<phrase name="setting_stripe_success_url_title" date="1696623137" username="ThatCatGuy" version="3.0"><![CDATA[Success URL]]></phrase>
+			<phrase name="setting_stripe_cancel_url_desc" date="1696623122" username="ThatCatGuy" version="3.0"><![CDATA[This is the URL that members are redirected to if the payment is Cancelled. <small>Required</small>]]></phrase>
+			<phrase name="setting_stripe_cancel_url_title" date="1696623137" username="ThatCatGuy" version="3.0"><![CDATA[Cancel URL]]></phrase>
+		</phrasetype>
+	</phrases>
+	<options>
+	</options>
+	<helptopics>
+	</helptopics>
+	<cronentries>
+	</cronentries>
+	<faqentries>
+	</faqentries>
+	<navigation>
+	</navigation>
+</product>

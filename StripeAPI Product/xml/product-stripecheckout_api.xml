@@ -126,9 +126,9 @@ $db->show_errors();]]></uninstallcode>
 			<phrase name="setting_stripe_webhook_secret_title" date="1696623180" username="ThatCatGuy" version="3.0"><![CDATA[Webhook Signing Secret]]></phrase>
 			<phrase name="stripe_order_instructions" date="1696623185" username="ThatCatGuy" version="3.0"><![CDATA[To pay for your subscription using <a href="https://stripe.com/">Stripe</a> click the button below. <br />
 This will redirect you to the Stripe checkout page (https://checkout.stripe.com/) where you can fill in your payment information.]]></phrase>
-			<phrase name="setting_stripe_success_url_desc" date="1696623122" username="ThatCatGuy" version="3.0"><![CDATA[This is the URL that members are redirected to if the payment is Successful. <small>Required</small>]]></phrase>
+			<phrase name="setting_stripe_success_url_desc" date="1696623122" username="ThatCatGuy" version="3.0"><![CDATA[This is the URL that members are redirected to if the payment is Successful.<small>*Required</small> <p><b>Example:</b> https://www.example.com/forum.php</p>]]></phrase>
 			<phrase name="setting_stripe_success_url_title" date="1696623137" username="ThatCatGuy" version="3.0"><![CDATA[Success URL]]></phrase>
-			<phrase name="setting_stripe_cancel_url_desc" date="1696623122" username="ThatCatGuy" version="3.0"><![CDATA[This is the URL that members are redirected to if the payment is Cancelled. <small>Required</small>]]></phrase>
+			<phrase name="setting_stripe_cancel_url_desc" date="1696623122" username="ThatCatGuy" version="3.0"><![CDATA[This is the URL that members are redirected to if the payment is Cancelled.<small>*Required</small> <p><b>Example:</b> https://www.example.com/payments.php</p>]]></phrase>
 			<phrase name="setting_stripe_cancel_url_title" date="1696623137" username="ThatCatGuy" version="3.0"><![CDATA[Cancel URL]]></phrase>
 		</phrasetype>
 	</phrases>

@@ -50,8 +50,8 @@ $apisettings = array(
 	"secret_key"      => array("type" => "text", "value" => "", "validate" => "string"),
 	"webhook_id"      => array("type" => "text", "value" => "", "validate" => "string"),
 	"webhook_secret"  => array("type" => "text", "value" => "", "validate" => "string"),
-	"success_url"  		=> array("type" => "text", "value" => "", "validate" => "string"),
-	"cancel_url"  		=> array("type" => "text", "value" => "", "validate" => "string")
+	"success_url"  	  => array("type" => "text", "value" => "", "validate" => "string"),
+	"cancel_url"  	  => array("type" => "text", "value" => "", "validate" => "string")
 );
 
 $api = array(

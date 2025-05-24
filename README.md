@@ -1,6 +1,6 @@
 # Stripe-Payment-Gateway-vBulletin-4.2.5
 A fully working vBulletin 4.2.5 Stripe Payment API made from the vBulletin 5 class_stripe.php.
-![Screenshot 2025-05-23 221511](https://github.com/user-attachments/assets/605e53ed-d50f-4575-be57-5d7dbc92d421)
+![1ac862f7c8f1a3c91a17eb66e55f748d609f653c4d2bf43d9b12adef8568555c](https://github.com/user-attachments/assets/d67a4ea7-fd9d-469f-80f4-5379fac0fd26)
 
 # Information:
 This was made to be used on **vBulletin 4.2.5** it might work on lower version but thats for others to test.
@@ -32,3 +32,14 @@ This is my test one.
 2. Then click on **Order** and it will take you to the pay where you choose which Gateway to pay with.
 
 ![Screenshot 2025-05-23 221446](https://github.com/user-attachments/assets/849f547b-7ab9-49a3-b9c4-5c736702adc1)
+
+# Single Payment
+![Screenshot 2025-05-23 221511](https://github.com/user-attachments/assets/9188a7c6-421d-4028-9ae8-f48f23ffb90f)
+# Recurring Payment
+![Screenshot 2025-05-23 222217](https://github.com/user-attachments/assets/d333bbce-fd0c-46d2-9c2c-1812779c4c96)
+
+# Payments Page Active Subscription 
+![Screenshot 2025-05-23 222004](https://github.com/user-attachments/assets/d43efcd9-2374-4079-94b3-d89fc2e4d59d)
+
+# Paid Subscription Logs AdminCP
+![Screenshot 2025-05-23 222026](https://github.com/user-attachments/assets/6d874cf6-c9f0-4537-a0e9-5d7efb73aff4)
